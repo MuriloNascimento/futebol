@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>Times de futebol</title>
+		<style>
+			html{height:100%}
+			body{height: 100%}
+			*{border:0; padding:0; margin:0; font-size: 12px;}
+			body>div{float:left;}
+			.conteudo{height: 100%;}
+			.mainMenu{background-color:rgb(22, 141, 217); height: 100%; padding: 30px; position: fixed;}
+			.mainMenu a{text-decoration: none;}
+			.corpo{padding: 10px; position: absolute; left: 338px;}
+			form > div{margin-bottom: 10px;}
+			form{margin-bottom: 20px;}
+			.sist{height:100%;}
+		</style>
+	</h:head>
+	<h:body>
+		<div class="ui-grid ui-grid-responsive sist">
+			<div class="ui-grid-row conteudo">
+				<div class="mainMenu ui-grid-col-3">
+					<ui:include src="/skin/templates/base/menu.xhtml"></ui:include>
+				</div>
+				<div class="corpo ui-grid-col-9">
+					<h:form>
+						<p:messages></p:messages>
+						<h:inputHidden value="#{timeMB.time.id}" />
+						<div>
+							<h:outputLabel value="Informe o nome do time: "/>
+						</div>
+						<div>
+							<p:inputText value="#{timeMB.time.nome}" />
+						</div>
+						<div>
+							<h:outputLabel value="Informe o tecnico do time: "/>
+						</div>
+						<div>
+							<p:inputText value="#{timeMB.time.tecnico}" />
+						</div>
+						<div>
+							<h:outputLabel value="Informe o estádio do time: "/>
+						</div>
+						<div>
+							<p:inputText value="#{timeMB.time.estadio}" />
+						</div>
+						<div>
+							<h:outputLabel value="Informe o número de titulos do time: "/>
+						</div>
+						<div>
+							<p:spinner id="basic" value="#{timeMB.time.titulos}" />
+						</div>
+						<div>
+							<p:commandButton action="#{timeMB.adicionar}" value="salvar" update="@form"/>
+						</div>
+								
+						<p:dataTable id="tabela" value="#{timeMB.times}" var="time" paginator="true" rows="8">
+							<p:column headerText="Id">
+								<h:outputText value="#{time.id}"></h:outputText>
+							</p:column>
+							<p:column headerText="Nome">
+								<h:outputText value="#{time.nome}"></h:outputText>
+							</p:column>
+							<p:column headerText="Tecnico">
+								<h:outputText value="#{time.tecnico}"></h:outputText>
+							</p:column>
+							<p:column headerText="Estadio">
+								<h:outputText value="#{time.estadio}"></h:outputText>
+							</p:column>
+							<p:column headerText="Titutlos">
+								<h:outputText value="#{time.titulos}"></h:outputText>
+							</p:column>
+							<p:column>
+								<p:commandButton icon="ui-icon-trash" title="excluir" update="@form" oncomplete="confirmacao.show()">
+									<f:setPropertyActionListener target="#{timeMB.time}" value="#{time}"></f:setPropertyActionListener>
+						        </p:commandButton>
+								<p:commandButton icon="ui-icon-pencil" title="editar" update="@form">
+									<f:setPropertyActionListener target="#{timeMB.time}" value="#{time}"></f:setPropertyActionListener>
+								</p:commandButton>
+								<p:confirmDialog widgetVar="confirmacao"
+									message="Deseja excluir este produto?" severity="alert"
+									closable="true">
+									<p:commandButton value="sim"
+										actionListener="#{timeMB.time}" onclick="hide"
+										update="@form" process="@this"></p:commandButton>
+									<p:commandButton value="nao" onclick="hide"></p:commandButton>
+								</p:confirmDialog>
+							</p:column>
+						</p:dataTable>
+						
+						
+					
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</h:body>
+
+</html>
