@@ -15,7 +15,8 @@
 			body>div{float:left;}
 			.conteudo{height: 100%;}
 			.mainMenu{background-color:rgb(22, 141, 217); height: 100%; padding: 30px; position: fixed;}
-			.mainMenu a{text-decoration: none;}
+			.mainMenu a{text-decoration: none; color: white; font-size: 18px; text-transform: uppercase; margin-top: 20px; display: block;}
+			.mainMenu .ui-state-default{border:1px solid white !important;}
 			.corpo{padding: 10px; position: absolute; left: 338px;}
 			form > div{margin-bottom: 10px;}
 			form{margin-bottom: 20px;}
@@ -57,10 +58,16 @@
 							<p:spinner id="basic" value="#{timeMB.time.titulos}" />
 						</div>
 						<div>
+							<h:outputLabel value="Informe a data de fundação do time: "/>
+						</div>
+						<div>
+							<p:calendar id="inline" value="#{timeMB.time.fundacao}" mode="inline" />
+						</div>	
+						<div>
 							<p:commandButton action="#{timeMB.adicionar}" value="salvar" update="@form"/>
 						</div>
-								
-						<p:dataTable id="tabela" value="#{timeMB.times}" var="time" paginator="true" rows="8">
+						
+						<p:dataTable value="#{timeMB.times}" var="time" rows="8" paginator="true" paginatorAlwaysVisible="true" paginatorPosition="bottom">
 							<p:column headerText="Id">
 								<h:outputText value="#{time.id}"></h:outputText>
 							</p:column>
@@ -70,32 +77,33 @@
 							<p:column headerText="Tecnico">
 								<h:outputText value="#{time.tecnico}"></h:outputText>
 							</p:column>
-							<p:column headerText="Estadio">
+							<p:column headerText="estadio">
 								<h:outputText value="#{time.estadio}"></h:outputText>
 							</p:column>
-							<p:column headerText="Titutlos">
+							<p:column headerText="titulos">
 								<h:outputText value="#{time.titulos}"></h:outputText>
 							</p:column>
+							<p:column headerText="Fundado em">
+								<h:outputText value="#{time.fundacao}"></h:outputText>
+							</p:column>
 							<p:column>
-								<p:commandButton icon="ui-icon-trash" title="excluir" update="@form" oncomplete="confirmacao.show()">
+								<p:commandButton icon="ui-icon-trash" title="excluir" update="@form" oncomplete="PF('confirmacao').show()">
 									<f:setPropertyActionListener target="#{timeMB.time}" value="#{time}"></f:setPropertyActionListener>
 						        </p:commandButton>
 								<p:commandButton icon="ui-icon-pencil" title="editar" update="@form">
 									<f:setPropertyActionListener target="#{timeMB.time}" value="#{time}"></f:setPropertyActionListener>
 								</p:commandButton>
 								<p:confirmDialog widgetVar="confirmacao"
-									message="Deseja excluir este produto?" severity="alert"
+									message="Deseja excluir este time?" severity="alert"
 									closable="true">
 									<p:commandButton value="sim"
-										actionListener="#{timeMB.time}" onclick="hide"
+										actionListener="#{timeMB.remove}" onclick="hide"
 										update="@form" process="@this"></p:commandButton>
 									<p:commandButton value="nao" onclick="hide"></p:commandButton>
 								</p:confirmDialog>
 							</p:column>
 						</p:dataTable>
 						
-						
-					
 					</h:form>
 				</div>
 			</div>

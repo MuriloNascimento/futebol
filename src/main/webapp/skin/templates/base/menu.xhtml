@@ -6,10 +6,14 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<h:form>
-		<p:menu>
-			<p:menuitem value="times" url="times.xhtml"></p:menuitem>
-			<p:menuitem value="jogadores" url="jogadores.xhtml"></p:menuitem>
-		</p:menu>
+		<div>
+			<h:outputLink value="times.xhtml">times</h:outputLink>
+		</div>
+		<p:separator></p:separator>
+		<div>
+			<h:outputLink value="jogadores.xhtml">jogadores</h:outputLink>
+		</div>
+		<p:separator></p:separator>
 	</h:form>
 
 </ui:composition>

@@ -1,5 +1,6 @@
 package com.m104.futebol.model.entidades;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Time {
@@ -22,6 +25,9 @@ public class Time {
 	private String estadio;
 	
 	private String tecnico;
+	
+	@Temporal(value=TemporalType.DATE)
+	private Date fundacao;
 	
 	@Column(name="titulos", columnDefinition="int default '0'")
 	private int titulos; 
@@ -42,6 +48,16 @@ public class Time {
 			return false;
 		return true;
 	}
+
+	public Date getFundacao() {
+		return fundacao;
+	}
+
+	public void setFundacao(Date fundacao) {
+		this.fundacao = fundacao;
+	}
+
+
 
 	public long getId() {
 		return id;
