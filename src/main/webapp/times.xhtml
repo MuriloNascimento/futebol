@@ -31,13 +31,15 @@
 				</div>
 				<div class="corpo ui-grid-col-9">
 					<h:form>
-						<p:messages></p:messages>
 						<h:inputHidden value="#{timeMB.time.id}" />
 						<div>
 							<h:outputLabel value="Informe o nome do time: "/>
 						</div>
 						<div>
-							<p:inputText value="#{timeMB.time.nome}" />
+							<p:inputText id="nomeInput" value="#{timeMB.time.nome}" required="required">
+								
+							</p:inputText>
+							<p:message for="nomeInput" style="color:red" />
 						</div>
 						<div>
 							<h:outputLabel value="Informe o tecnico do time: "/>
