@@ -30,14 +30,15 @@
 					<ui:include src="/skin/templates/base/menu.xhtml"></ui:include>
 				</div>
 				<div class="corpo ui-grid-col-9">
-					<h:form>
+					<h:form>	
 						<h:inputHidden value="#{timeMB.time.id}" />
 						<div>
 							<h:outputLabel value="Informe o nome do time: "/>
 						</div>
 						<div>
-							<p:inputText id="nomeInput" value="#{timeMB.time.nome}" required="required">
-								
+							<p:inputText id="nomeInput" value="#{timeMB.time.nome}">
+								<f:validateLength minimum="3" maximum="40" />
+								<p:clientValidator />
 							</p:inputText>
 							<p:message for="nomeInput" style="color:red" />
 						</div>
@@ -68,6 +69,9 @@
 						<div>
 							<p:commandButton action="#{timeMB.adicionar}" value="salvar" update="@form"/>
 						</div>
+						<div>
+							<p:commandButton type="reset" value="Reset"></p:commandButton> 
+						</div>
 						
 						<p:dataTable value="#{timeMB.times}" var="time" rows="8" paginator="true" paginatorAlwaysVisible="true" paginatorPosition="bottom">
 							<p:column headerText="Id">
@@ -89,10 +93,11 @@
 								<h:outputText value="#{time.fundacao}"></h:outputText>
 							</p:column>
 							<p:column>
-								<p:commandButton icon="ui-icon-trash" title="excluir" update="@form" oncomplete="PF('confirmacao').show()">
+								<p:commandButton icon="ui-icon-trash" title="excluir" update="@form" oncomplete="PF('confirmacao').show()" validateClient="false">
 									<f:setPropertyActionListener target="#{timeMB.time}" value="#{time}"></f:setPropertyActionListener>
+									
 						        </p:commandButton>
-								<p:commandButton icon="ui-icon-pencil" title="editar" update="@form">
+								<p:commandButton icon="ui-icon-pencil" title="editar" update="@form" validateClient="false">
 									<f:setPropertyActionListener target="#{timeMB.time}" value="#{time}"></f:setPropertyActionListener>
 								</p:commandButton>
 								<p:confirmDialog widgetVar="confirmacao"
