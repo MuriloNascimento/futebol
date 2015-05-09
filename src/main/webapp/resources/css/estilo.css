@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+body{color:red; font-size: 14px;}
+.menuBar{margin-bottom: 10px;}
+label input{margin-left: 10px;}
+form > div{margin: 10px 0;}

@@ -32,7 +32,7 @@ public class Time {
 	@Column(name="titulos", columnDefinition="int default '0'")
 	private int titulos; 
 	
-	@OneToMany(mappedBy="time",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="time",fetch=FetchType.EAGER)
 	private List<Jogador> jogadores;
 
 	@Override

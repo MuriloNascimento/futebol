@@ -3,7 +3,7 @@ package com.m104.futebol.model.manegedbeans;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -11,7 +11,7 @@ import com.m104.futebol.model.entidades.Jogador;
 import com.m104.futebol.model.repositorio.JogadorRepositorio;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class JogadorMB {
 	
 	@Inject

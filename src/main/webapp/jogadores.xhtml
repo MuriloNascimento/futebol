@@ -13,27 +13,39 @@
 					<h:form>
 						<h:inputHidden value="#{timeMB.time.id}" />
 						<div>
-							<h:outputLabel value="Informe o nome do time: "/><br/>
+							<h:outputLabel value="Informe o nome do time: "/>
+						</div>
+						<div>
 							<p:inputText id="nomeInput" value="#{timeMB.time.nome}"></p:inputText>
 						</div>
 						<div>
-							<h:outputLabel value="Informe o tecnico do time: "/><br/>
+							<h:outputLabel value="Informe o tecnico do time: "/>
+						</div>
+						<div>
 							<p:inputText value="#{timeMB.time.tecnico}" />
 						</div>
 						<div>
-							<h:outputLabel value="Informe o estádio do time: "/><br/>
+							<h:outputLabel value="Informe o estádio do time: "/>
+						</div>
+						<div>
 							<p:inputText value="#{timeMB.time.estadio}" />
 						</div>
 						<div>
-							<h:outputLabel value="Informe o número de titulos do time: "/><br/>
+							<h:outputLabel value="Informe o número de titulos do time: "/>
+						</div>
+						<div>
 							<p:spinner id="basic" value="#{timeMB.time.titulos}" />
 						</div>
 						<div>
-							<h:outputLabel value="Informe a data de fundação do time: "/><br/>
-							<p:calendar id="inline" value="#{timeMB.time.fundacao}" />
+							<h:outputLabel value="Informe a data de fundação do time: "/>
+						</div>
+						<div>
+							<p:calendar id="inline" value="#{timeMB.time.fundacao}" mode="german" />
 						</div>	
 						<div>
 							<p:commandButton action="#{timeMB.adicionar}" value="salvar" update="@form"/>
+						</div>
+						<div>
 							<p:commandButton type="reset" value="Reset"></p:commandButton> 
 						</div>
 					</h:form>
