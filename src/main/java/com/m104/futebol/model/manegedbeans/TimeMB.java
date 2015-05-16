@@ -5,8 +5,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,7 +20,6 @@ public class TimeMB {
 	@Inject
 	private TimeRepositorio timeRepo;
 	
-	@ManagedProperty(value = "#{time}")
 	private Time time = new Time();
 		
 	private List<Time> times;
@@ -31,19 +30,26 @@ public class TimeMB {
 	}
 	
 	public void adicionar(){
-		this.timeRepo.adicionar(this.time);
-		this.time = new Time();
-		this.init();
+		try {
+			this.timeRepo.adicionar(this.time);
+			this.init();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Salvo com sucesso",null));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Não Foi possivel salvar",null));
+		}
+	}
+	
+	public void attrTime(ActionEvent event){
+		time = (Time) event.getComponent().getAttributes().get("time");
 	}
 	
 	public void remove(){
 		try{
-				this.timeRepo.remove(this.time);
+				this.timeRepo.remove(time);
 				this.init();
-				this.time = new Time();
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Excluido com sucesso",null));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Excluido com sucesso o time "+this.time.getNome(),null));
 		} catch (Exception e) {
-			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Excluido sem sucesso",null));
+			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Não Foi possivel excluir o time "+this.time.getNome(),null));
 		}
 	}
 

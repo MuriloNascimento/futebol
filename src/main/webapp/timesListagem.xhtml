@@ -4,13 +4,52 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-
+	<ui:define name="pageTitle">Listagem de Times</ui:define>
 	<ui:define name="corpo">
+	
+		<p:panel>
+			<h:form>
+				<h3><h:outputText value="Lista de Times"/></h3>
+				<p:separator />
+				<p:dataTable var="time" value="#{timeMB.times}" rows="8" paginator="true" paginatorPosition="bottom">
+					<p:column headerText="Id">
+						<h:outputText value="#{time.id}"></h:outputText>
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{time.nome}"></h:outputText>
+					</p:column>
+					<p:column headerText="Estádio">
+						<h:outputText value="#{time.estadio}"></h:outputText>
+					</p:column>
+					<p:column headerText="Técnico">
+						<h:outputText value="#{time.tecnico}"></h:outputText>
+					</p:column>
+					<p:column headerText="Titulos">
+						<p:rating readonly="true" stars="10" value="#{time.titulos}"></p:rating>
+					</p:column>
+					<p:column headerText="Fundacao">
+						<h:outputText value="#{time.fundacao}">
+							<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Ações">
+						<p:commandButton icon="ui-icon-trash" title="excluir" update="@form" oncomplete="PF('confirmacao').show()"></p:commandButton>
+						<p:commandButton icon="ui-icon-pencil" title="alterar" action="times">
+								<f:setPropertyActionListener target="#{timeMB.time}" value="#{time}"></f:setPropertyActionListener>
+						</p:commandButton>
+						<p:confirmDialog widgetVar="confirmacao" message="Deseja excluir este time? #{timeMB.time.nome}" closable="true">	
+								<p:commandButton value="sim" action="#{timeMB.remove}" actionListener="#{timeMB.attrTime}" onclick="PF('confirmacao').hide()" update="@form" process="@this">
+									<f:attribute name="time" value="#{time}" />
+								</p:commandButton>
+							    <p:commandButton value="nao" onclick="PF('confirmacao').hide()"></p:commandButton>
+						</p:confirmDialog>
+					</p:column>
+				</p:dataTable>
+				<p:messages></p:messages>
+			</h:form>
 
-			<p:panel>
-					listagem
-			</p:panel>
-			
+		</p:panel>
+		
 	</ui:define>
 
 </ui:composition>

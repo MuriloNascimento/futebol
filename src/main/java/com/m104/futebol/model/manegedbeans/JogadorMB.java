@@ -3,7 +3,9 @@ package com.m104.futebol.model.manegedbeans;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -11,13 +13,13 @@ import com.m104.futebol.model.entidades.Jogador;
 import com.m104.futebol.model.repositorio.JogadorRepositorio;
 
 @Named
-@ViewScoped
+@RequestScoped
 public class JogadorMB {
 	
 	@Inject
 	private JogadorRepositorio jogadorRepo;
 
-	private Jogador jogador;
+	private Jogador jogador = new Jogador();
 	
 	private List<Jogador> jogadores;
 	
@@ -27,14 +29,24 @@ public class JogadorMB {
 	}
 	
 	public void adicionar(){
-		this.jogadorRepo.adicionar(this.jogador);
-		this.jogador = new Jogador();
-		this.jogadores = null;
+		try {
+			this.jogadorRepo.adicionar(this.jogador);
+			this.jogador = new Jogador();
+			this.jogadores = null;
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Salvo com sucesso",null));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Não Foi possivel salvar",null));
+		}
 	}
 	
 	public void remove(Jogador Jogador){
-		this.jogadorRepo.remove(jogador);
-		this.jogadores = null;
+		try {
+			this.jogadorRepo.remove(jogador);
+			this.jogadores = null;
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Excluido o jogador "+Jogador.getNome(),null));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Não foi possivel excluir o jogador"+Jogador.getNome(),null));
+		}
 	}
 
 	public JogadorRepositorio getJogadorRepo() {

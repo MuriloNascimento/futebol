@@ -7,7 +7,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 import com.m104.futebol.model.entidades.Time;
 
@@ -26,9 +26,10 @@ public class TimeRepositorio {
 		this.em.remove(timeRm);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public List<Time> buscarTodos(){
-		TypedQuery<Time> query = this.em.createQuery("select t from Time t",Time.class);
+		Query query = this.em.createNativeQuery("CALL buscar_todos_times",Time.class);
 		return query.getResultList();
 	}
 	

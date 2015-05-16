@@ -4,50 +4,33 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-
+	<ui:define name="pageTitle">Cadastrar Jogadores</ui:define>
 	<ui:define name="corpo">
 
 			<p:panel>
-					<h1><h:outputText value="Cadastro de times"/></h1>
+					<h3><h:outputText value="Cadastro de Jogador"/></h3>
 					<p:separator />
 					<h:form>
-						<h:inputHidden value="#{timeMB.time.id}" />
+						<h:inputHidden value="#{jogadorMB.jogador.id}" />
 						<div>
-							<h:outputLabel value="Informe o nome do time: "/>
+							<h:outputLabel value="Informe o nome do jogador: "/><br/>
+							<p:inputText value="#{jogadorMB.jogador.nome}" required="true"></p:inputText>
 						</div>
 						<div>
-							<p:inputText id="nomeInput" value="#{timeMB.time.nome}"></p:inputText>
+							<h:outputLabel value="Informe a posição do jogador: "/><br/>
+							<p:inputText value="#{jogadorMB.jogador.posicao}" required="true"/>
 						</div>
 						<div>
-							<h:outputLabel value="Informe o tecnico do time: "/>
+							<h:outputLabel value="Informe o time do jogador: "/><br/>
+							<p:selectOneMenu id="console" value="#{jogadorMB.jogador.time}" required="true" converter="#{timeConversor}">
+								<f:selectItems value="#{timeMB.times}" var="time" itemLabel="#{time.nome}"></f:selectItems>
+							</p:selectOneMenu>
 						</div>
 						<div>
-							<p:inputText value="#{timeMB.time.tecnico}" />
-						</div>
-						<div>
-							<h:outputLabel value="Informe o estádio do time: "/>
-						</div>
-						<div>
-							<p:inputText value="#{timeMB.time.estadio}" />
-						</div>
-						<div>
-							<h:outputLabel value="Informe o número de titulos do time: "/>
-						</div>
-						<div>
-							<p:spinner id="basic" value="#{timeMB.time.titulos}" />
-						</div>
-						<div>
-							<h:outputLabel value="Informe a data de fundação do time: "/>
-						</div>
-						<div>
-							<p:calendar id="inline" value="#{timeMB.time.fundacao}" mode="german" />
-						</div>	
-						<div>
-							<p:commandButton action="#{timeMB.adicionar}" value="salvar" update="@form"/>
-						</div>
-						<div>
+							<p:commandButton action="#{jogadorMB.adicionar}" value="salvar" update="@form"/>
 							<p:commandButton type="reset" value="Reset"></p:commandButton> 
 						</div>
+						<p:messages></p:messages>
 					</h:form>
 				
 			</p:panel>

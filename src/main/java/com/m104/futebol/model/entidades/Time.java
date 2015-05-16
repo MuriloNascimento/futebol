@@ -3,6 +3,7 @@ package com.m104.futebol.model.entidades;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,10 +30,12 @@ public class Time {
 	@Temporal(value=TemporalType.DATE)
 	private Date fundacao;
 	
+	private String escudo;
+	
 	@Column(name="titulos", columnDefinition="int default '0'")
 	private int titulos; 
 	
-	@OneToMany(mappedBy="time",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="time",fetch=FetchType.EAGER,cascade=CascadeType.REMOVE)
 	private List<Jogador> jogadores;
 
 	@Override
@@ -48,6 +51,15 @@ public class Time {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public int hashCode() {
+		final long prime = 31;
+		long result = 1;
+		result = prime * result + id;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return (int) result;
+	}
 
 	public Date getFundacao() {
 		return fundacao;
@@ -56,8 +68,6 @@ public class Time {
 	public void setFundacao(Date fundacao) {
 		this.fundacao = fundacao;
 	}
-
-
 
 	public long getId() {
 		return id;
@@ -105,6 +115,14 @@ public class Time {
 
 	public void setTitulos(int titulos) {
 		this.titulos = titulos;
+	}
+
+	public String getEscudo() {
+		return escudo;
+	}
+
+	public void setEscudo(String escudo) {
+		this.escudo = escudo;
 	}
 
 }

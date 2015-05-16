@@ -2,6 +2,7 @@ package com.m104.futebol.model.conversor;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
@@ -9,7 +10,7 @@ import com.m104.futebol.model.entidades.Time;
 import com.m104.futebol.model.repositorio.TimeRepositorio;
 
 @FacesConverter("timeConversor")
-public class TimeConversor {
+public class TimeConversor implements Converter {
 	
 	@Inject
 	TimeRepositorio timeRepo;

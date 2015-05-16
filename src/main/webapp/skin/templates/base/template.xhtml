@@ -6,21 +6,29 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<h:head>
-		<title>Template</title>
-		<h:outputStylesheet name="estilo.css" library="css" />
-	</h:head>
-	
-	<body>
-		
-		<p:menubar styleClass="menuBar">
-			<p:menuitem value="Times" url="times.xhtml" />
-			<p:menuitem value="Times" url="times.xhtml" />
-			<p:menuitem value="Jogadores" url="jogadores.xhtml" />
-		</p:menubar>
-		
-		<ui:insert name="corpo"></ui:insert>
-	
-	</body>
+<h:head>
+	<title><ui:insert name="pageTitle"></ui:insert></title>
+	<h:outputStylesheet name="estilo.css" library="css" />
+	<h:outputScript name="script.js" library="js"></h:outputScript>
+</h:head>
+
+<body>
+	<p:panel styleClass="topo">
+		<h:graphicImage library="images" name="bola.png" width="30"></h:graphicImage><span class="titulo">FuteBoL</span>
+	</p:panel>
+	<p:menubar styleClass="menuBar">
+		<p:submenu label="Times">
+			<p:menuitem value="cadastrar" url="times.xhtml"/>
+			<p:menuitem value="ver todos" url="timesListagem.xhtml"/>
+		</p:submenu>
+		<p:submenu label="Jogadores">
+			<p:menuitem value="cadastrar" url="jogadores.xhtml"/>
+			<p:menuitem value="ver todos" url="jogadoresListagem.xhtml"/>
+		</p:submenu>
+	</p:menubar>
+
+	<ui:insert name="corpo"></ui:insert>
+
+</body>
 
 </html>

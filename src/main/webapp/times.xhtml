@@ -4,38 +4,40 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-
+	<ui:define name="pageTitle">Cadastrar Times</ui:define>
 	<ui:define name="corpo">
 
 			<p:panel>
-					<h1><h:outputText value="Cadastro de times"/></h1>
+					<h3><h:outputText value="Cadastro de times"/></h3>
 					<p:separator />
 					<h:form>
+						
 						<h:inputHidden value="#{timeMB.time.id}" />
 						<div>
 							<h:outputLabel value="Informe o nome do time: "/><br/>
-							<p:inputText id="nomeInput" value="#{timeMB.time.nome}"></p:inputText>
+							<p:inputText id="nome" value="#{timeMB.time.nome}" required="true"/>
 						</div>
 						<div>
 							<h:outputLabel value="Informe o tecnico do time: "/><br/>
-							<p:inputText value="#{timeMB.time.tecnico}" />
+							<p:inputText id="tecnico" value="#{timeMB.time.tecnico}" required="true"/>
 						</div>
 						<div>
-							<h:outputLabel value="Informe o estádio do time: "/><br/>
-							<p:inputText value="#{timeMB.time.estadio}" />
+							<h:outputLabel value="Informe o estádio do time: " /><br/>
+							<p:inputText id="estadio" value="#{timeMB.time.estadio}" required="true"/>
 						</div>
 						<div>
 							<h:outputLabel value="Informe o número de titulos do time: "/><br/>
-							<p:spinner id="basic" value="#{timeMB.time.titulos}" />
+							<p:spinner id="titulo" value="#{timeMB.time.titulos}" required="true" min="0" max="10"/>
 						</div>
 						<div>
 							<h:outputLabel value="Informe a data de fundação do time: "/><br/>
-							<p:calendar id="inline" value="#{timeMB.time.fundacao}" />
+							<p:calendar id="br" value="#{timeMB.time.fundacao}" locale="pt" navigator="true" required="true" />
 						</div>	
 						<div>
 							<p:commandButton action="#{timeMB.adicionar}" value="salvar" update="@form"/>
 							<p:commandButton type="reset" value="Reset"></p:commandButton> 
 						</div>
+						<p:messages></p:messages>
 					</h:form>
 				
 			</p:panel>

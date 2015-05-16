@@ -1,0 +1,32 @@
+<ui:composition template="/skin/templates/base/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="pageTitle">Listagem de Jogadores</ui:define>
+	<ui:define name="corpo">
+	
+		<p:panel>
+			<h3><h:outputText value="Lista de Jogadores"/></h3>
+			<p:separator />
+			<p:dataTable var="jogador" value="#{jogadorMB.jogadores}" rows="8" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Id">
+					<h:outputText value="#{jogador.id}"></h:outputText>
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{jogador.nome}"></h:outputText>
+				</p:column>
+				<p:column headerText="Posição">
+					<h:outputText value="#{jogador.posicao}"></h:outputText>
+				</p:column>
+				<p:column headerText="Time">
+					<h:outputText value="#{jogador.time.nome}"></h:outputText>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+		
+		
+	</ui:define>
+
+</ui:composition>
