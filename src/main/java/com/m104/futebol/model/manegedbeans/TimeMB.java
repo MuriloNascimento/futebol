@@ -32,6 +32,7 @@ public class TimeMB {
 	public void adicionar(){
 		try {
 			this.timeRepo.adicionar(this.time);
+			this.time = new Time();
 			this.init();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Salvo com sucesso",null));
 		} catch (Exception e) {

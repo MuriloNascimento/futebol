@@ -21,8 +21,21 @@
 							<p:inputText value="#{jogadorMB.jogador.posicao}" required="true"/>
 						</div>
 						<div>
+							<h:outputLabel value="Informe a quantidade de gols do jogador: "/><br/>
+							<p:inputText value="#{jogadorMB.jogador.gols}" required="true"/>
+						</div>
+						<div>
+							<h:outputLabel value="Informe a idade do jogador: "/><br/>
+							<p:inputText value="#{jogadorMB.jogador.idade}" required="true"/>
+						</div>
+						<div>
+							<h:outputLabel value="Informe quantos jogos o jogador realizou: "/><br/>
+							<p:inputText value="#{jogadorMB.jogador.jogosRealizados}" required="true"/>
+						</div>
+						<div>
 							<h:outputLabel value="Informe o time do jogador: "/><br/>
 							<p:selectOneMenu id="console" value="#{jogadorMB.jogador.time}" required="true" converter="#{timeConversor}">
+								<f:selectItem itemLabel="Escolha um time" itemValue="#{null}" noSelectionOption="true" />
 								<f:selectItems value="#{timeMB.times}" var="time" itemLabel="#{time.nome}"></f:selectItems>
 							</p:selectOneMenu>
 						</div>

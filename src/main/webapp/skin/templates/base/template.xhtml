@@ -16,15 +16,21 @@
 	<p:panel styleClass="topo">
 		<h:graphicImage library="images" name="bola.png" width="30"></h:graphicImage><span class="titulo">FuteBoL</span>
 	</p:panel>
-	<p:menubar styleClass="menuBar">
+	<p:menubar styleClass="menuBar" rendered="#{usuarioMB.loged}">
+		<p:menuitem value="Olá #{usuarioMB.usuario.login}" url="#" disabled="true"/>
 		<p:submenu label="Times">
-			<p:menuitem value="cadastrar" url="times.xhtml"/>
-			<p:menuitem value="ver todos" url="timesListagem.xhtml"/>
+			<p:menuitem value="cadastrar" url="http://localhost:8085/futebol/panel/times.xhtml"/>
+			<p:menuitem value="ver todos" url="http://localhost:8085/futebol/panel/timesListagem.xhtml"/>
 		</p:submenu>
 		<p:submenu label="Jogadores">
-			<p:menuitem value="cadastrar" url="jogadores.xhtml"/>
-			<p:menuitem value="ver todos" url="jogadoresListagem.xhtml"/>
+			<p:menuitem value="cadastrar" url="http://localhost:8085/futebol/panel/jogadores.xhtml"/>
+			<p:menuitem value="ver todos" url="http://localhost:8085/futebol/panel/jogadoresListagem.xhtml"/>
 		</p:submenu>
+		<f:facet name="options">
+			<h:form>
+            	<h:commandLink type="buttom" action="#{usuarioMB.logout}" value="Logout"></h:commandLink>
+        	</h:form>
+        </f:facet>
 	</p:menubar>
 
 	<ui:insert name="corpo"></ui:insert>

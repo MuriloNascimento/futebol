@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -28,24 +29,28 @@ public class JogadorMB {
 		this.jogadores = this.jogadorRepo.buscarTodos();
 	}
 	
+	public void attrJogador(ActionEvent event){
+		jogador = (Jogador) event.getComponent().getAttributes().get("jogador");
+	}
+	
 	public void adicionar(){
 		try {
 			this.jogadorRepo.adicionar(this.jogador);
 			this.jogador = new Jogador();
-			this.jogadores = null;
+			this.init();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Salvo com sucesso",null));
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Não Foi possivel salvar",null));
 		}
 	}
 	
-	public void remove(Jogador Jogador){
+	public void remove(){
 		try {
-			this.jogadorRepo.remove(jogador);
-			this.jogadores = null;
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Excluido o jogador "+Jogador.getNome(),null));
+			this.jogadorRepo.remove(this.jogador);
+			this.init();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Excluido o jogador "+jogador.getNome(),null));
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Não foi possivel excluir o jogador"+Jogador.getNome(),null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Não foi possivel excluir o jogador"+jogador.getNome(),null));
 		}
 	}
 

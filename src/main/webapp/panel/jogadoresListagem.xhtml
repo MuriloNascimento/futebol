@@ -1,0 +1,55 @@
+<ui:composition template="/skin/templates/base/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="pageTitle">Listagem de Jogadores</ui:define>
+	<ui:define name="corpo">
+	
+	<p:panel>
+		<h:form>
+			<h3><h:outputText value="Lista de Jogadores"/></h3>
+			<p:separator />
+			<p:dataTable var="jogador" value="#{jogadorMB.jogadores}" rows="8" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Id">
+					<h:outputText value="#{jogador.id}"></h:outputText>
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{jogador.nome}"></h:outputText>
+				</p:column>
+				<p:column headerText="Posição">
+					<h:outputText value="#{jogador.posicao}"></h:outputText>
+				</p:column>
+				<p:column headerText="Gols">
+					<h:outputText value="#{jogador.gols}"></h:outputText>
+				</p:column>
+				<p:column headerText="Jogos">
+					<h:outputText value="#{jogador.jogosRealizados}"></h:outputText>
+				</p:column>
+				<p:column headerText="Idade">
+					<h:outputText value="#{jogador.idade}"></h:outputText>
+				</p:column>
+				<p:column headerText="Time">
+					<h:outputText value="#{jogador.time.nome}"></h:outputText>
+				</p:column>
+				<p:column headerText="Ações">
+					<p:commandButton icon="ui-icon-trash" title="excluir" update="@form" oncomplete="PF('confirmacao').show()"></p:commandButton>
+					<p:commandButton icon="ui-icon-pencil" title="alterar" action="jogadores">
+							<f:setPropertyActionListener target="#{jogadorMB.jogador}" value="#{jogador}"></f:setPropertyActionListener>
+					</p:commandButton>
+					<p:confirmDialog widgetVar="confirmacao" message="Deseja excluir este jogador?" closable="true">	
+							<p:commandButton value="sim" action="#{jogadorMB.remove}" actionListener="#{jogadorMB.attrJogador}" onclick="PF('confirmacao').hide()" update="@form" process="@this">
+								<f:attribute name="jogador" value="#{jogador}" />
+							</p:commandButton>
+						    <p:commandButton value="nao" onclick="PF('confirmacao').hide()"></p:commandButton>
+					</p:confirmDialog>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+		
+		
+	</ui:define>
+
+</ui:composition>

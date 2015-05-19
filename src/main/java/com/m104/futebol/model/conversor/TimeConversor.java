@@ -20,6 +20,9 @@ public class TimeConversor implements Converter {
 	}
 
 	public String getAsString(FacesContext context, UIComponent component, Object time) {
+		if(time == null){
+			return "";
+		}
 		Time t = (Time) time;
 		return Long.toString(t.getId());
 	}

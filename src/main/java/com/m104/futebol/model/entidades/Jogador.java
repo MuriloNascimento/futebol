@@ -17,6 +17,12 @@ public class Jogador {
 	
 	private String posicao;
 	
+	private int gols;
+	
+	private int idade;
+	
+	private int jogosRealizados;
+	
 	@JoinColumn
 	@ManyToOne
 	private Time time;
@@ -70,6 +76,30 @@ public class Jogador {
 
 	public void setTime(Time time) {
 		this.time = time;
+	}
+
+	public int getGols() {
+		return gols;
+	}
+
+	public void setGols(int gols) {
+		this.gols = gols;
+	}
+
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	public int getJogosRealizados() {
+		return jogosRealizados;
+	}
+
+	public void setJogosRealizados(int jogosRealizados) {
+		this.jogosRealizados = jogosRealizados;
 	}
 	
 }

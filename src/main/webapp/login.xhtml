@@ -1,0 +1,32 @@
+<ui:composition template="/skin/templates/base/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="pageTitle">Login</ui:define>
+	<ui:define name="corpo">
+
+			<p:panel>
+					<h3><h:outputText value="Logar no sistema"/></h3>
+					<p:separator />
+					<h:form>
+						<div>
+							<h:outputLabel value="Informe seu login: "/><br/>
+							<p:inputText id="nome" value="#{usuarioMB.usuario.login}" required="true"/>
+						</div>
+						<div>
+							<h:outputLabel value="Informe sua senha: "/><br/>
+							<p:inputText id="tecnico" value="#{usuarioMB.usuario.senha}" required="true"/>
+						</div>
+						<div>
+							<p:commandButton action="#{usuarioMB.logar}" value="logar" update="@form"/>
+						</div>
+						<p:messages></p:messages>
+					</h:form>
+				
+			</p:panel>
+			
+	</ui:define>
+
+</ui:composition>
