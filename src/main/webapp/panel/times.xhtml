@@ -31,7 +31,11 @@
 						</div>
 						<div>
 							<p:commandButton action="#{timeMB.adicionar}" value="salvar" update="@form"/>
-							<p:commandButton type="reset" value="Reset"></p:commandButton> 
+							<p:commandButton type="reset" value="Reset"></p:commandButton>
+							<p:commandButton value="Print" type="button" icon="ui-icon-print">
+							    <p:printer target="image" />
+							</p:commandButton>
+							<p:graphicImage id="image" library="images" name="saved.png" /> 
 						</div>
 						<p:messages></p:messages>
 					</h:form>

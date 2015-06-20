@@ -15,7 +15,7 @@ public class FutebolRestClient {
 		List<Time> times = clientRequest.get(Time.class).getEntity(new GenericType<List<Time>>() {});
 
 		for (Time time : times) {
-			System.out.println(time.getNome());
+			System.out.println(time.getNome()+" - "+time.getId());
 		}
 
 	}
