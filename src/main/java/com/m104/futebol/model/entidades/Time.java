@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -71,7 +70,7 @@ public class Time implements Serializable{
 		return (int) result;
 	}
 
-	@XmlAttribute
+	@XmlElement
 	public long getId() {
 		return id;
 	}

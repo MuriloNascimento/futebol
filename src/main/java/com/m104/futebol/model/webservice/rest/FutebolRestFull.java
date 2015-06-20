@@ -1,5 +1,7 @@
 package com.m104.futebol.model.webservice.rest;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -20,9 +22,8 @@ public class FutebolRestFull {
 	@GET
 	@Path("/times")
 	@Produces("application/xml")
-	public Time gietTimes(){
-		Time time = timeRepositorio.buscarTodos().get(1);
-		return time;
+	public List<Time> gietTimes(){
+		return timeRepositorio.buscarTodos();
 	}
 
 }
