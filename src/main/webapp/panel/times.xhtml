@@ -30,10 +30,6 @@
 							<p:spinner id="titulo" value="#{timeMB.time.titulos}" required="true" min="0" max="10"/>
 						</div>
 						<div>
-							<h:outputLabel value="Informe a data de fundação do time: "/><br/>
-							<p:calendar id="br" value="#{timeMB.time.fundacao}" locale="pt" navigator="true" required="true" />
-						</div>	
-						<div>
 							<p:commandButton action="#{timeMB.adicionar}" value="salvar" update="@form"/>
 							<p:commandButton type="reset" value="Reset"></p:commandButton> 
 						</div>

@@ -27,11 +27,6 @@
 					<p:column headerText="Titulos">
 						<p:rating readonly="true" stars="10" value="#{time.titulos}"></p:rating>
 					</p:column>
-					<p:column headerText="Fundacao">
-						<h:outputText value="#{time.fundacao}">
-							<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-						</h:outputText>
-					</p:column>
 					<p:column headerText="Ações">
 						<p:commandButton icon="ui-icon-trash" title="excluir" update="@form" oncomplete="PF('confirmacao').show()"></p:commandButton>
 						<p:commandButton icon="ui-icon-pencil" title="alterar" action="times">

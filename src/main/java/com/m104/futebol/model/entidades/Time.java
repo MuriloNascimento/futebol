@@ -1,6 +1,6 @@
 package com.m104.futebol.model.entidades;
 
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,12 +10,19 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-public class Time {
+@XmlRootElement
+public class Time implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private long id;
@@ -27,17 +34,20 @@ public class Time {
 	
 	private String tecnico;
 	
-	@Temporal(value=TemporalType.DATE)
-	private Date fundacao;
-	
 	private String escudo;
 	
 	@Column(name="titulos", columnDefinition="int default '0'")
 	private int titulos; 
 	
-	@OneToMany(mappedBy="time",fetch=FetchType.EAGER,cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="time",fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Jogador> jogadores;
 
+	public Time(long id) {
+		this.id = id;
+	}
+
+	public Time() {}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -61,14 +71,7 @@ public class Time {
 		return (int) result;
 	}
 
-	public Date getFundacao() {
-		return fundacao;
-	}
-
-	public void setFundacao(Date fundacao) {
-		this.fundacao = fundacao;
-	}
-
+	@XmlAttribute
 	public long getId() {
 		return id;
 	}
@@ -77,6 +80,7 @@ public class Time {
 		this.id = id;
 	}
 
+	@XmlElement
 	public String getNome() {
 		return nome;
 	}
@@ -85,6 +89,7 @@ public class Time {
 		this.nome = nome;
 	}
 
+	@XmlElement
 	public List<Jogador> getJogadores() {
 		return jogadores;
 	}
@@ -93,6 +98,7 @@ public class Time {
 		this.jogadores = jogadores;
 	}
 
+	@XmlElement
 	public String getEstadio() {
 		return estadio;
 	}
@@ -101,6 +107,7 @@ public class Time {
 		this.estadio = estadio;
 	}
 
+	@XmlElement
 	public String getTecnico() {
 		return tecnico;
 	}
@@ -109,6 +116,7 @@ public class Time {
 		this.tecnico = tecnico;
 	}
 
+	@XmlElement
 	public int getTitulos() {
 		return titulos;
 	}
@@ -117,6 +125,7 @@ public class Time {
 		this.titulos = titulos;
 	}
 
+	@XmlElement
 	public String getEscudo() {
 		return escudo;
 	}

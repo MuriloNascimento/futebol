@@ -1,13 +1,24 @@
 package com.m104.futebol.model.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.m104.futebol.model.adapter.JogadorAdapter;
 
 @Entity
-public class Jogador {
+@XmlJavaTypeAdapter(JogadorAdapter.class)
+public class Jogador implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
